@@ -509,43 +509,47 @@ export default function Home() {
               <h3 className="text-xl font-semibold text-slate-900 mb-6">
                 Formulaire de contact
               </h3>
-              <form className="space-y-4">
+              <form action="https://formspree.io/f/xojnzlzg" method="POST" className="space-y-4">
+                <input type="hidden" name="_subject" value="Nouveau message depuis le site web" />
+                <input type="text" name="_gotcha" style={{ display: 'none' }} />
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">
                       Prénom
                     </label>
-                    <Input placeholder="Votre prénom" className="bg-slate-50" />
+                    <Input name="prenom" placeholder="Votre prénom" className="bg-slate-50" required />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">
                       Nom
                     </label>
-                    <Input placeholder="Votre nom" className="bg-slate-50" />
+                    <Input name="nom" placeholder="Votre nom" className="bg-slate-50" required />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
                     Email
                   </label>
-                  <Input type="email" placeholder="votre@email.com" className="bg-slate-50" />
+                  <Input type="email" name="email" placeholder="votre@email.com" className="bg-slate-50" required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
                     Entreprise
                   </label>
-                  <Input placeholder="Nom de votre entreprise" className="bg-slate-50" />
+                  <Input name="entreprise" placeholder="Nom de votre entreprise" className="bg-slate-50" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
                     Message
                   </label>
                   <Textarea 
+                    name="message"
                     placeholder="Décrivez votre projet ou vos besoins..." 
                     className="bg-slate-50 min-h-[120px]"
+                    required
                   />
                 </div>
-                <Button className="w-full bg-slate-900 hover:bg-slate-800 text-white">
+                <Button type="submit" className="w-full bg-slate-900 hover:bg-slate-800 text-white">
                   Envoyer le message
                 </Button>
               </form>
