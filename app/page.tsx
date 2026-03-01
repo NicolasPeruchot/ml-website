@@ -498,8 +498,8 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm text-slate-400">Email</p>
-                    <a href="mailto:contact@martinelestoquoy.com" className="text-white hover:text-slate-300 transition-colors">
-                      contact@martinelestoquoy.com
+                    <a href="mailto:contact@mlestoquoy.com" className="text-white hover:text-slate-300 transition-colors">
+                      contact@mlestoquoy.com
                     </a>
                   </div>
                 </div>
@@ -510,8 +510,8 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm text-slate-400">Téléphone</p>
-                    <a href="tel:+33123456789" className="text-white hover:text-slate-300 transition-colors">
-                      +33 1 23 45 67 89
+                    <a href="tel:+33609030167" className="text-white hover:text-slate-300 transition-colors">
+                      +33 6 09 03 01 67
                     </a>
                   </div>
                 </div>
@@ -522,7 +522,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm text-slate-400">LinkedIn</p>
-                    <a href="#" className="text-white hover:text-slate-300 transition-colors">
+                    <a href="https://www.linkedin.com/in/martinelestoquoy/" className="text-white hover:text-slate-300 transition-colors">
                       Voir mon profil LinkedIn
                     </a>
                   </div>
