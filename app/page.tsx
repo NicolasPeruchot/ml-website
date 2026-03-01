@@ -1,3 +1,7 @@
+"use client";
+
+import { useState, useRef } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -21,6 +25,37 @@ import {
 } from "lucide-react";
 
 export default function Home() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.currentTarget);
+    
+    try {
+      const response = await fetch("https://formspree.io/f/xkovakva", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json",
+        },
+      });
+      
+      if (response.ok) {
+        toast.success("Message envoyé avec succès ! Je vous répondrai rapidement.");
+        formRef.current?.reset();
+      } else {
+        toast.error("Une erreur est survenue. Veuillez réessayer.");
+      }
+    } catch (error) {
+      toast.error("Une erreur est survenue. Veuillez réessayer.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-slate-50">
       {/* Navigation */}
@@ -509,7 +544,7 @@ export default function Home() {
               <h3 className="text-xl font-semibold text-slate-900 mb-6">
                 Formulaire de contact
               </h3>
-              <form action="https://formspree.io/f/xojnzlzg" method="POST" className="space-y-4">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                 <input type="hidden" name="_subject" value="Nouveau message depuis le site web" />
                 <input type="text" name="_gotcha" style={{ display: 'none' }} />
                 <div className="grid md:grid-cols-2 gap-4">
@@ -517,26 +552,26 @@ export default function Home() {
                     <label className="block text-sm font-medium text-slate-700 mb-1">
                       Prénom
                     </label>
-                    <Input name="prenom" placeholder="Votre prénom" className="bg-slate-50" required />
+                    <Input name="prenom" placeholder="Votre prénom" className="bg-slate-50 text-slate-900" required />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">
                       Nom
                     </label>
-                    <Input name="nom" placeholder="Votre nom" className="bg-slate-50" required />
+                    <Input name="nom" placeholder="Votre nom" className="bg-slate-50 text-slate-900" required />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
                     Email
                   </label>
-                  <Input type="email" name="email" placeholder="votre@email.com" className="bg-slate-50" required />
+                  <Input type="email" name="email" placeholder="votre@email.com" className="bg-slate-50 text-slate-900" required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
                     Entreprise
                   </label>
-                  <Input name="entreprise" placeholder="Nom de votre entreprise" className="bg-slate-50" />
+                  <Input name="entreprise" placeholder="Nom de votre entreprise" className="bg-slate-50 text-slate-900" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
@@ -545,12 +580,12 @@ export default function Home() {
                   <Textarea 
                     name="message"
                     placeholder="Décrivez votre projet ou vos besoins..." 
-                    className="bg-slate-50 min-h-[120px]"
+                    className="bg-slate-50 text-slate-900 min-h-[120px]"
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full bg-slate-900 hover:bg-slate-800 text-white">
-                  Envoyer le message
+                <Button type="submit" disabled={isSubmitting} className="w-full bg-slate-900 hover:bg-slate-800 text-white">
+                  {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
                 </Button>
               </form>
             </div>
